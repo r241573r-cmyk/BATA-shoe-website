@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Promotions | Bata Zimbabwe</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo">Bata <span>Zimbabwe</span></a>
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="stores.html">Store Locator</a></li>
+        <li><a href="promotions.html" class="active">Promotions</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+      <div class="header-icons">
+        <div class="search-icon"><i class="fas fa-search"></i></div>
+        <div class="user-icon"><i class="fas fa-user"></i></div>
+        <div class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="promo-hero">
+    <div class="container">
+      <h1>Exclusive Promotions & Discounts</h1>
+      <p>Step into savings with our latest deals on shoes for the whole family!</p>
+    </div>
+  </section>
+
+  <!-- Active Promotions -->
+  <section class="promotions container">
+    <h2>Current Promotions</h2>
+    <div class="promo-grid" id="promo-container">
+      <!-- Promotions will be loaded here -->
+    </div>
+  </section>
+
+  <!-- Countdown Timer for Special Promo -->
+  <section class="promo-countdown container">
+    <h2>🔥 Limited Time Offer</h2>
+    <p>School Shoes Mega Sale – Hurry, ends soon!</p>
+    <div id="countdown" class="countdown-timer"></div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="promo-newsletter">
+    <div class="container">
+      <h2>Stay Updated</h2>
+      <p>Subscribe to get the latest promotions directly in your inbox.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit" class="btn">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 Bata Shoe Company Zimbabwe. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Promotion Data
+    const promotions = [
+      { title: "Back to School Sale", desc: "Up to 30% off on durable school shoes for kids.", img: "school shoe.jpg", valid: "Valid until 15 Oct 2025" },
+      { title: "Buy 1 Get 1 Free", desc: "On selected formal shoes for men & women.", img: "man shoe.jpg", valid: "Valid until 10 Oct 2025" },
+    ];
+
+    const promoContainer = document.getElementById("promo-container");
+
+    // Render promotions
+    promotions.forEach(promo => {
+      const card = document.createElement("div");
+      card.classList.add("promo-card");
+      card.innerHTML = `
+        <img src="${promo.img}" alt="${promo.title}">
+        <div class="promo-info">
+          <h3>${promo.title}</h3>
+          <p>${promo.desc}</p>
+          <p class="valid">${promo.valid}</p>
+        </div>
+      `;
+      promoContainer.appendChild(card);
+    });
+
+    // Countdown Timer (set deadline)
+    const deadline = new Date("Oct 15, 2025 23:59:59").getTime();
+    const timer = document.getElementById("countdown");
+
+    const countdown = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = deadline - now;
+
+      if (distance < 0) {
+        clearInterval(countdown);
+        timer.innerHTML = "EXPIRED";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      timer.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+  </script>
+</body>
+</html>

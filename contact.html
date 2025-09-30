@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Contact Us | Bata Zimbabwe</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo">Bata <span>Zimbabwe</span></a>
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="stores.html">Store Locator</a></li>
+        <li><a href="promotions.html">Promotions</a></li>
+        <li><a href="contact.html" class="active">Contact Us</a></li>
+      </ul>
+      <div class="header-icons">
+        <div class="search-icon"><i class="fas fa-search"></i></div>
+        <div class="user-icon"><i class="fas fa-user"></i></div>
+        <div class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('https://via.placeholder.com/1600x400?text=Contact+Us'); background-size: cover; background-position: center;">
+    <div class="container hero-content">
+      <h1>Get In Touch</h1>
+      <p>We’re here to help you with any questions about our products or services.</p>
+    </div>
+  </section>
+
+  <!-- Contact Info -->
+  <section class="contact-info container">
+    <h2 class="section-title">Contact Information</h2>
+    <div class="info-grid">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <h3>Our Office</h3>
+        <p>123 Shoe Street, Harare, Zimbabwe</p>
+      </div>
+      <div>
+        <i class="fas fa-phone"></i>
+        <h3>Phone</h3>
+        <p>+263 123 456 789</p>
+      </div>
+      <div>
+        <i class="fas fa-envelope"></i>
+        <h3>Email</h3>
+        <p>info@bata.co.zw</p>
+      </div>
+      <div>
+        <i class="fas fa-clock"></i>
+        <h3>Business Hours</h3>
+        <p>Mon – Sat: 8AM – 5PM<br>Sun: Closed</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="contact-form-section">
+    <div class="container">
+      <h2 class="section-title">Send Us a Message</h2>
+      <form class="contact-form" id="contactForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="subject" placeholder="Subject" required>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+ <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 Bata Shoe Company Zimbabwe. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Contact Form Submission
+    document.getElementById("contactForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      alert("Thank you for contacting us! We will respond soon.");
+      this.reset();
+    });
+
+    </script>
+</body>
+</html>

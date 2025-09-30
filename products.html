@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bata Zimbabwe | Products</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo">Bata <span>Zimbabwe</span></a>
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">Products</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="stores.html">Store Locator</a></li>
+        <li><a href="promotions.html">Promotions</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+      <div class="header-icons">
+        <div class="search-icon"><i class="fas fa-search"></i></div>
+        <div class="user-icon"><i class="fas fa-user"></i></div>
+        <div class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Products Section -->
+  <section class="featured-products">
+    <div class="container">
+      <h2 class="section-title">Our Products</h2>
+
+      <!-- Filter buttons -->
+      <div class="filter-bar" style="text-align:center; margin-bottom:30px;">
+        <button class="btn filter-btn" data-category="all">All</button>
+        <button class="btn filter-btn" data-category="men">Men</button>
+        <button class="btn filter-btn" data-category="women">Women</button>
+        <button class="btn filter-btn" data-category="kids">Kids</button>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="products-container">
+        <!-- Products will load here from JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 Bata Shoe Company Zimbabwe. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Modals (same as other pages) -->
+  <div class="modal-overlay" id="newsletter-modal">
+    <div class="modal">
+      <span class="modal-close">&times;</span>
+      <h2>Subscribe to Our Newsletter</h2>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email address" required>
+        <button type="submit" class="btn">Subscribe</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="search-modal" id="search-modal">
+    <div class="search-container">
+      <span class="search-close">&times;</span>
+      <input type="text" class="search-input" placeholder="Search for products...">
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Product List
+    const products = [
+      { id: 1, title: "Men's formal Shoe", price: 59.99, category: "men", img: "man shoe.jpg" },
+      { id: 2, title: "Women's Casual Shoe", price: 49.99, category: "women", img:"woman shoe.jpg" },
+      { id: 3, title: "School Shoes", price: 39.99, category: "kids", img: "school shoe.jpg" },
+    ];
+
+    const container = document.getElementById('products-container');
+
+    // Render Products
+    function displayProducts(filter) {
+      container.innerHTML = '';
+      const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.classList.add('product-card');
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.title}" class="product-img">
+          <div class="product-info">
+            <h3 class="product-title">${p.title}</h3>
+            <p class="product-price">$${p.price.toFixed(2)}</p>
+            <button class="btn add-to-cart" data-id="${p.id}">Add to Cart</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      // Reattach add-to-cart events
+      document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', () => {
+          let count = parseInt(document.querySelector('.cart-count').textContent);
+          document.querySelector('.cart-count').textContent = count + 1;
+          btn.textContent = "Added!";
+          btn.disabled = true;
+          setTimeout(() => { btn.textContent = "Add to Cart"; btn.disabled = false; }, 1500);
+        });
+      });
+    }
+
+    // Load All Products Initially
+    displayProducts('all');
+
+    // Filter Functionality
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        displayProducts(btn.dataset.category);
+      });
+    });
+  </script>
+</body>
+</html>
