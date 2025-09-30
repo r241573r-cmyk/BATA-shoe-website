@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Store Locator | Bata Zimbabwe</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo">Bata <span>Zimbabwe</span></a>
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="stores.html" class="active">Store Locator</a></li>
+        <li><a href="promotions.html">Promotions</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+      <div class="header-icons">
+        <div class="search-icon"><i class="fas fa-search"></i></div>
+        <div class="user-icon"><i class="fas fa-user"></i></div>
+        <div class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="store-hero">
+    <div class="container">
+      <h1>Find a Bata Store Near You</h1>
+      <p>We have stores across Zimbabwe. Use the map or browse the list below to locate your nearest Bata store.</p>
+    </div>
+  </section>
+
+  <!-- Store Search -->
+  <section class="store-search container">
+    <input type="text" id="storeSearch" class="search-input" placeholder="Search by city or town...">
+  </section>
+
+  <!-- Stores List -->
+  <section class="store-list container" id="store-container">
+    <!-- JS will load store cards here -->
+  </section>
+
+  <!-- Map -->
+  <section class="store-map container">
+    <h2>Map View</h2>
+    <iframe 
+      src="https://www.google.com/maps/d/embed?mid=1Vb1e-StoreMapExample" 
+      width="100%" height="400" style="border:0;" allowfullscreen="">
+    </iframe>
+    <p style="font-size: 0.9rem; margin-top: 8px;">📍 Click on the map markers to view store details.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 Bata Shoe Company Zimbabwe. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Store Data
+    const stores = [
+      { city: "Harare", name: "Bata First Street", address: "First Street Mall, Harare", phone: "+263 242 700111", hours: "Mon-Sat 8am - 6pm" },
+      { city: "Bulawayo", name: "Bata Bulawayo Centre", address: "Jason Moyo Ave, Bulawayo", phone: "+263 292 880222", hours: "Mon-Sat 8am - 6pm" },
+      { city: "Gweru", name: "Bata Gweru Main", address: "Main Street, Gweru", phone: "+263 254 330333", hours: "Mon-Sat 8am - 5pm" },
+      { city: "Mutare", name: "Bata Mutare Plaza", address: "Herbert Chitepo St, Mutare", phone: "+263 20 440444", hours: "Mon-Sat 8am - 5:30pm" },
+      { city: "Masvingo", name: "Bata Masvingo Centre", address: "Robert Mugabe Rd, Masvingo", phone: "+263 39 550555", hours: "Mon-Sat 8am - 5pm" }
+    ];
+
+    const container = document.getElementById("store-container");
+
+    // Display stores
+    function displayStores(list) {
+      container.innerHTML = '';
+      list.forEach(store => {
+        const card = document.createElement('div');
+        card.classList.add('store-card');
+        card.innerHTML = `
+          <h3>${store.name}</h3>
+          <p><i class="fas fa-map-marker-alt"></i> ${store.address}</p>
+          <p><i class="fas fa-phone"></i> ${store.phone}</p>
+          <p><i class="fas fa-clock"></i> ${store.hours}</p>
+          <p><i class="fas fa-city"></i> <strong>${store.city}</strong></p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Initial load
+    displayStores(stores);
+
+    // Search filter
+    document.getElementById('storeSearch').addEventListener('keyup', (e) => {
+      const keyword = e.target.value.toLowerCase();
+      const filtered = stores.filter(store => store.city.toLowerCase().includes(keyword));
+      displayStores(filtered);
+    });
+  </script>
+</body>
+</html>
